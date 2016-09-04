@@ -1,0 +1,11 @@
+.hdr {
+    float:   left;
+    width:   100%;
+    height:  70px;
+}
+
+.conts-left
+.conts-center
+.conts-right {
+    float: left;
+}
