@@ -28,9 +28,9 @@ class TitleHeader extends Header {
     
     init(tgt) {
         try {
-            this.setOption({
-                'background' : '#257182'
-            });
+            //this.setOption({
+            //    'background' : '#257182'
+            //});
             super.init(tgt);
             this.title.setLink('./');
 //            this.title.setClickEvt(function() {

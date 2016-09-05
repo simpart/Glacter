@@ -9,24 +9,28 @@ $(function(){
             try {
                 /* show header */
                 var ttl_hdr = new TitleHeader('G L A C T E R');
+                ttl_hdr.setOption({
+                    'background' : '#257182'
+                });
                 ttl_hdr.init('main');
                 ttl_hdr.setVisible(true);
-                app.top.showMenu(); 
-                app.top.showForm();
+                
+                /* show menu */
+                var menu = new SlideMenu();
+                menu.getHeader().setOption({
+                    'background' : '#257182',
+                    'height'     : $(window).height() - 70
+                });
+                menu.addConts('Search', app.top.getForm());
+                menu.init('main');
+                menu.setVisible(true);
+                //app.top.showForm();
             } catch (e) {
                 throw new Error(e.stack + '\n');
             }
         }
         
-        app.top.showMenu = function() {
-            try {
-                // var menu = new SlideMenu();
-            } catch (e) {
-                throw new Error(e.stack + '\n');
-            }
-        }
-        
-        app.top.showForm = function () {
+        app.top.getForm = function () {
             try {
                 var form = new Form('srch');
                 
@@ -42,14 +46,7 @@ $(function(){
                     }
                 });
                 form.addForm(srch_btn);
-                
-                form.setOption({
-                    'position' : 'relative',
-                    'top'      : (($(window).height()-350) / 2) + 'px'
-                });
-                
-                form.init('main');
-                form.setVisible(true);
+                return form;
             } catch (e) {
                 throw new Error(e.stack + '\n');
             }
@@ -92,12 +89,16 @@ $(function(){
                          './src/js/view/parts/Input.js'  ,
                          './src/js/view/parts/Message.js',
                          './src/js/view/parts/Button.js' ,
-                         './src/js/view/parts/Form.js'],
+                         './src/js/view/parts/Form.js'   ,
+                         './src/js/view/parts/Menu.js'   ,
+                         './src/js/view/parts/Menuhdr.js',
+                         './src/js/lib/velocity/velocity.min.js' ],
                         function() {
                             try {
                                 tetraring.loader.js(
                                     ['./src/js/view/parts/Titlehdr.js',
-                                     ],
+                                     './src/js/view/parts/Menubar.js' ,
+                                     './src/js/view/parts/SlideMenu.js'],
                                     function() {
                                         try {
                                             app.top.showConts();

@@ -6,7 +6,7 @@ class Menu extends Contents {
                 [(hdr || null),  // header
                  new Array()]    // contents
             );
-            this.sel_idx = null;
+            this.sel_idx = 0;
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
@@ -21,12 +21,13 @@ class Menu extends Contents {
         }
     }
     
-    addConts(cnt) {
+    addConts(name, cnt) {
         try {
             if (null === this.conts[0]) {
                 throw new Error('menu header is null');
             }
             this.conts[1].push(cnt);
+            this.conts[0].addElem(name);
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
@@ -52,19 +53,25 @@ class Menu extends Contents {
     
     init(tgt) {
         try {
-            if ((null == tgt) || ('' == tgt)) {
-                throw new Error('invalid parameter');
+            super.init(tgt);
+            /* init menu header */
+            this.conts[0].init(this.getId());
+            
+            /* init menu contents */
+            for (var idx in this.conts[1]) {
+                this.conts[1][idx].init(this.getId());
             }
             
-            $('#' + tgt).append('<div id=\''+ this.name + 'menu-wrap' +'\'></div>');
-            if (null === this.header) {
-                throw new Error('menu header is null');
-            }
-            this.header.init(this.name + 'menu-wrap');
+            //$('#' + this.getId()).append('<div id=\''+ this.name + 'menu-wrap' +'\'></div>');
             
-            for (var idx in this.conts) {
-                this.conts[idx].init(this.name + 'menu-wrap');
-            }
+            //if (null === this.header) {
+            //    throw new Error('menu header is null');
+            //}
+            //this.header.init(this.name + 'menu-wrap');
+            //
+            //for (var idx in this.conts) {
+            //    this.conts[idx].init(this.name + 'menu-wrap');
+            //}
             
             
         } catch (e) {
@@ -74,16 +81,21 @@ class Menu extends Contents {
     
     setVisible(flg) {
         try {
-        //    this.header.setVisible(flg);
-        //    for (var idx in this.conts) {
-        //        this.conts[idx].init(flg);
-        //    }
-        //    
-        //    if (true === flg) {
-        //        $('#' + this.name + 'menu-wrap').fadeIn();
-        //    } else if (false === flg) {
-        ///        $('#' + this.name + 'menu-wrap').fadeOut();
-         //   }
+            /* set header visible */
+            this.conts[0].setVisible(flg);
+            
+            /* set contents visible */
+            this.conts[1][this.sel_idx].setVisible(flg);
+            
+            super.setVisible(flg);
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
+    
+    getHeader() {
+        try {
+            return this.conts[0];
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
