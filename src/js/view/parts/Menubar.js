@@ -10,7 +10,18 @@ class Menubar extends Menuhdr {
     
     addElem(elm) {
         try {
-            super.addElem(new Button(elm));
+            var menu_elm = new Button(elm);
+            menu_elm.setOption({
+                'font-size'   : '20px'  ,
+                'font-weight' : '100'   ,
+                'min-width'   : '250px' ,
+                'height'      : '50px'  ,
+                'sel-color'   : 'white'
+            });
+            //menu_elm.setClickEvt(function() {
+            //    alert("test");
+            //});
+            super.addElem(menu_elm);
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
@@ -18,6 +29,7 @@ class Menubar extends Menuhdr {
     
     init(tgt) {
         try {
+            var own = this;
             super.init(tgt);
             tetraring.loader.html(
                 './html/parts/menuhdr.html',
@@ -28,22 +40,11 @@ class Menubar extends Menuhdr {
             );
             $('#' + this.getId()).css('margin-left', '15px');
             $('#' + this.getId()).css('margin-top', '15px');
-            var own_id = this.getId();
             $('#' + this.getId() + ' .menu-bar').click(function(){
-                try {
-                    // show menu header
-                    $('#' + own_id + ' .menu-hdr').fadeIn();
-                    $('#' + own_id + ' .menu-hdr').velocity({ left : 0 } , 300 );
-                } catch (e) {
-                    console.error(e.stack);
-                }
+                own.menuVisible(true);
             });
             
-            $('#' + this.getId() + ' .menu-hdr').css('width', '250px');
-            $('#' + this.getId() + ' .menu-hdr').css('height', $(window).height() + 'px');
-            $('#' + this.getId() + ' .menu-hdr').css('position', 'fixed');
-            $('#' + this.getId() + ' .menu-hdr').css('left', '-250px');
-            $('#' + this.getId() + ' .menu-hdr').css('border', 'solid 1px white');
+            $('#' + this.getId() + ' .menu-hdr').css('height'  , $(window).height() + 'px');
             
             for (var key in this.option) {
                 if ('height' == key) {
@@ -56,7 +57,46 @@ class Menubar extends Menuhdr {
                     $('#' + this.getId() + ' .menu-hdr').css(key, this.option[key]);
                 }
             }
+            $('#' + this.getId() + ' .menu-close').click(function(){
+                own.menuVisible(false);
+            });
             
+            /* set elements */
+            var pad = new Contents('');
+            pad.init(this.getId() + ' .menu-hdr');
+            $('#' + pad.getId()).css('width', '250px');
+            $('#' + pad.getId()).css('height', '70px');
+            pad.setVisible(true);
+            
+            for (var idx in this.conts) {
+                this.conts[idx].init(this.getId() + ' .menu-hdr');
+            }
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
+    
+    setVisible(flg) {
+        try {
+            super.setVisible(flg);
+            for (var idx in this.conts) {
+                this.conts[idx].setVisible(flg);
+            }
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
+    
+    menuVisible(flg) {
+        try {
+            if (true === flg) {
+                /* open */
+                $('#' + this.getId() + ' .menu-hdr').fadeIn();
+                $('#' + this.getId() + ' .menu-hdr').velocity({ left : 0 } , 250 );
+            } else {
+                /* close */
+                $('#' + this.getId() + ' .menu-hdr').velocity({ left : -250 } , 250 );
+            }
         } catch (e) {
             throw new Error(e.stack + '\n');
         }

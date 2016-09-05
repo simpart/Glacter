@@ -6,6 +6,7 @@ class Menu extends Contents {
                 [(hdr || null),  // header
                  new Array()]    // contents
             );
+            hdr.setMenu(this);
             this.sel_idx = 0;
         } catch (e) {
             throw new Error(e.stack + '\n');
@@ -35,17 +36,20 @@ class Menu extends Contents {
     
     notifySelect(idx) {
         try {
-            //this.conts[this.sel_idx].setVisible(
-            //    false,
-            //    function(idx) {
-            //        try {
-            //            this.conts[idx].setVisible(true);
-            //        } catch (e) {
-            //            console.error(e.stack);
-            //        }
-            //    },
-            //    idx
-            //);
+            if (this.sel_idx == idx) {
+                return;
+            }
+            this.conts[this.sel_idx].setVisible(
+                false,
+                function(idx) {
+                    try {
+                        this.conts[idx].setVisible(true);
+                    } catch (e) {
+                        console.error(e.stack);
+                    }
+                },
+                idx
+            );
         } catch (e) {
             throw new Error(e.stack + '\n');
         }

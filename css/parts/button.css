@@ -5,7 +5,7 @@
   display:        block;
   margin:         0px;
   padding:        0.6em 0.5em;
-  border:         none;
+  /*border:         none;*/
   background:     none;
   color:          inherit;
   vertical-align: middle;
@@ -51,19 +51,12 @@
 }
 .c-btn-ujarak:hover {
   color:        #fff;
-  border-color: #257182;
+  border-width: 1px;
+  border-color: white;
 }
 .c-btn-ujarak:hover::before {
   opacity:           1;
   -webkit-transform: translate3d(0, 0, 0);
   transform:         translate3d(0, 0, 0);
 }
-
-.c-tab-ujarak-hover {
-  color:        #fff;
-  background:   #257182;
-  border-color: #257182;
-}
-
-
 /* end of file */

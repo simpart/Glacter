@@ -21,7 +21,8 @@ $(function(){
                     'background' : '#257182',
                     'height'     : $(window).height() - 70
                 });
-                menu.addConts('Search', app.top.getForm());
+                menu.addConts('S e a r c h', app.top.getForm());
+                menu.addConts('I t e m', app.top.getForm());
                 menu.init('main');
                 menu.setVisible(true);
                 //app.top.showForm();
