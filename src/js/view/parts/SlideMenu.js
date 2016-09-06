@@ -8,6 +8,14 @@ class SlideMenu extends Menu {
         }
     }
     
+    notifySelect(idx) {
+       try {
+           super.notifySelect(idx);
+           this.conts[0].menuVisible(false);
+       } catch (e) {
+           throw new Error(e.stack + '\n');
+       }
+    }
     //init(tgt) {
     //    try {
     //    } catch (e) {

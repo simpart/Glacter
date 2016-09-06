@@ -74,8 +74,9 @@ class Form extends Contents {
     
     chkValue() {
         try {
-            if('' == this.conts[0].getValue() ) {
-                this.error.showMessage('search keyword is null.');
+            if( ('' == this.conts[0].getValue()) &&
+                ('' == this.conts[1].getValue()) ) {
+                this.error.showMessage('empty value');
                 return false;
             }
             return true;

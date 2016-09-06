@@ -5,6 +5,7 @@ $(function(){
         app.top    = {};
         app.search = null;
         app.item   = null;
+        app.menu   = null;
         app.top.showConts = function() {
             try {
                 /* show header */
@@ -22,9 +23,10 @@ $(function(){
                     'height'     : $(window).height() - 70
                 });
                 menu.addConts('S e a r c h', app.top.getForm());
-                menu.addConts('I t e m', app.top.getForm());
+                menu.addConts('I t e m', app.top.getItem());
                 menu.init('main');
                 menu.setVisible(true);
+                app.menu = menu;
                 //app.top.showForm();
             } catch (e) {
                 throw new Error(e.stack + '\n');
@@ -41,7 +43,7 @@ $(function(){
                 srch_btn.setClickEvt(function(){
                     try {
                         /* switch to search result */
-                        app.top.swhToSrch(form);
+                        app.top.showSrchRet(form);
                     } catch (e) {
                         console.error(e.stack);
                     }
@@ -53,27 +55,40 @@ $(function(){
             }
         }
         
-        app.top.swhToSrch = function(form) {
+        app.top.getItem = function() {
+            try {
+                var item   = new Contents('');
+                //var newbtn = new Button('New Item');
+                //newbtn.init(item.getId());
+                //newbtn.setVisible(true);
+                
+                return item;
+            } catch (e) {
+                throw new Error(e.stack + '\n');
+            }
+        }
+        
+        app.top.showSrchRet = function(form) {
             try {
                 if(false === form.chkValue()) {
                     return;
                 }
-                form.setVisible(false, function() {
-                    if (null === app.search) {
-                        tetraring.loader.js(
-                            ['./src/js/view/search.js'],
-                            function(){
-                                try {
-                                    app.search.showList(form.getValue(0));
-                                } catch (e) {
-                                    console.error(e.stack);
-                                }
-                            },null
-                        );
-                    } else {
-                        app.search.showList(form.getValue(0));
-                    }
-                });
+                if (null === app.search) {
+                    tetraring.loader.js(
+                        ['./src/js/view/parts/ContsTitle.js',
+                         './src/js/view/parts/Table.js'     ,
+                         './src/js/view/search.js'],
+                        function() {
+                            try {
+                                app.search.showList(form.getValue(0));
+                            } catch (e) {
+                                console.error(e.stack);
+                            }
+                        },null
+                    );
+                } else {
+                    app.search.showList(form.getValue(0));
+                }
             } catch (e) {
                 throw new Error(e.stack + '\n');
             }

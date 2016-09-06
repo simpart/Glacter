@@ -39,17 +39,19 @@ class Menu extends Contents {
             if (this.sel_idx == idx) {
                 return;
             }
-            this.conts[this.sel_idx].setVisible(
+            var menu = this;
+            this.conts[1][this.sel_idx].setVisible(
                 false,
-                function(idx) {
+                function() {
                     try {
-                        this.conts[idx].setVisible(true);
+                        menu.conts[1][idx].setVisible(true);
                     } catch (e) {
                         console.error(e.stack);
                     }
-                },
-                idx
+                }//,
+            //    idx
             );
+            this.sel_idx = idx;
         } catch (e) {
             throw new Error(e.stack + '\n');
         }

@@ -18,10 +18,14 @@ class Menubar extends Menuhdr {
                 'height'      : '50px'  ,
                 'sel-color'   : 'white'
             });
-            //menu_elm.setClickEvt(function() {
-            //    alert("test");
-            //});
-            super.addElem(menu_elm);
+            var menuhdr = this;
+            var menu = this.menu;
+            menu_elm.setClickEvt(function() {
+                var id  = $(this).parent('div').attr('id');
+                var idx = menuhdr.getMenuIdx(id);
+                menu.notifySelect(idx);
+            });
+            this.conts.push(menu_elm);
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
