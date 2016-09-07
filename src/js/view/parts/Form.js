@@ -24,13 +24,13 @@ class Form extends Contents {
             super.init(tgt);
             
             for(var key in this.option) {
-                $('#' + this.getId()).css(key, this.option[key]);
+                $('#' + this.getId()).css(this.option[key][0], this.option[key][1]);
             }
             
             var padleft = ($(window).width() -500) / 2;
             /* set error message */
             this.error = new Message();
-            this.error.setOption({
+            this.error.addOption({
                 'margin-left'  : (padleft) + 'px' ,
                 'background'   : '#ffc8d5',
                 'border-color' : 'red'    ,
@@ -42,14 +42,14 @@ class Form extends Contents {
             /* set form */
             for(var idx in this.conts) {
                 if (idx == (this.conts.length-1)) {
-                    this.conts[idx].setOption({
+                    this.conts[idx].addOption({
                         'margin-top'  : '50px'        ,
                         'margin-left' : padleft + 'px',
                         'position'    : 'relative'    ,
                         'left'        : '350px'
                     });
                 } else {
-                    this.conts[idx].setOption({
+                    this.conts[idx].addOption({
                         'margin-top'  : '20px'         ,
                         'margin-left' : padleft + 'px' ,
                     });

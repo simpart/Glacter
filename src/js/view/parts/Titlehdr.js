@@ -12,7 +12,7 @@ class TitleHeader extends Header {
     setTitle(ttl) {
         try {
             this.title = new Text(ttl);
-            this.title.setOption({
+            this.title.addOption({
                 'font-size'   : '35px'  ,
                 'color'       : 'white' ,
                 'font-weight' : 'bold'  ,
@@ -28,9 +28,6 @@ class TitleHeader extends Header {
     
     init(tgt) {
         try {
-            //this.setOption({
-            //    'background' : '#257182'
-            //});
             super.init(tgt);
             this.title.setLink('./');
 //            this.title.setClickEvt(function() {

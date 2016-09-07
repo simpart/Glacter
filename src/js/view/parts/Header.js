@@ -53,7 +53,7 @@ class Header extends Contents {
             $('#' + this.getId() + ' .conts-right').css('float', 'left');
             
             for (var key in this.option) {
-                $('#' + this.getId() + ' .header').css(key, this.option[key]);
+                $('#' + this.getId() + ' .header').css(this.option[key][0], this.option[key][1]);
             }
             
             if (null !== this.conts.left) {

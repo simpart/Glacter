@@ -10,7 +10,7 @@ $(function(){
             try {
                 /* show header */
                 var ttl_hdr = new TitleHeader('G L A C T E R');
-                ttl_hdr.setOption({
+                ttl_hdr.addOption({
                     'background' : '#257182'
                 });
                 ttl_hdr.init('main');
@@ -18,7 +18,7 @@ $(function(){
                 
                 /* show menu */
                 var menu = new SlideMenu();
-                menu.getHeader().setOption({
+                menu.getHeader().addOption({
                     'background' : '#257182',
                     'height'     : $(window).height() - 70
                 });
@@ -57,11 +57,20 @@ $(function(){
         
         app.top.getItem = function() {
             try {
-                var item   = new Contents('');
-                //var newbtn = new Button('New Item');
-                //newbtn.init(item.getId());
-                //newbtn.setVisible(true);
-                
+                var item    = new ContsGroup();
+                var new_btn = new Button('New Item');
+                new_btn.setClickEvt(function(){
+                    tetraring.loader.js(
+                        ['./src/js/view/parts/TextArea.js',
+                         './src/js/view/items.js'],
+                        function(item) {
+                            app.item.newItem(item);
+                        },item
+                    );
+                });
+                item.addConts(new_btn);
+                item.addConts(new ContsGroup());  // item creater
+                item.addConts(new ContsGroup());  // item viewer
                 return item;
             } catch (e) {
                 throw new Error(e.stack + '\n');
@@ -99,16 +108,17 @@ $(function(){
             function() {
                 try {
                     tetraring.loader.js(
-                        ['./src/js/view/parts/Header.js' ,
-                         './src/js/view/parts/Text.js'   ,
+                        ['./src/js/view/parts/Header.js'         ,
+                         './src/js/view/parts/Text.js'           ,
                          './src/js/lib/FlowupLabels.js/src/jquery.FlowupLabels.js',
-                         './src/js/view/parts/Input.js'  ,
-                         './src/js/view/parts/Message.js',
-                         './src/js/view/parts/Button.js' ,
-                         './src/js/view/parts/Form.js'   ,
-                         './src/js/view/parts/Menu.js'   ,
-                         './src/js/view/parts/Menuhdr.js',
-                         './src/js/lib/velocity/velocity.min.js' ],
+                         './src/js/view/parts/Input.js'          ,
+                         './src/js/view/parts/Message.js'        ,
+                         './src/js/view/parts/Button.js'         ,
+                         './src/js/view/parts/Form.js'           ,
+                         './src/js/view/parts/Menu.js'           ,
+                         './src/js/view/parts/Menuhdr.js'        ,
+                         './src/js/lib/velocity/velocity.min.js' ,
+                         './src/js/view/parts/ContsGroup.js' ],
                         function() {
                             try {
                                 tetraring.loader.js(

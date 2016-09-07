@@ -28,9 +28,9 @@ class Input extends Contents {
             $('#' + this.getId() + ' .fl_wrap').css('height', '46px');
             for (var key in this.option) {
                 if ('width' == key) {
-                    $('#' + this.getId() + ' .fl_wrap').css(key, this.option[key]);
+                    $('#' + this.getId() + ' .fl_wrap').css(this.option[key][0], this.option[key][1]);
                 } else {
-                    $('#' + this.getId()).css(key, this.option[key]);
+                    $('#' + this.getId()).css(this.option[key][0], this.option[key][1]);
                 }
             }
         } catch (e) {

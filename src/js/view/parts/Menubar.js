@@ -11,7 +11,7 @@ class Menubar extends Menuhdr {
     addElem(elm) {
         try {
             var menu_elm = new Button(elm);
-            menu_elm.setOption({
+            menu_elm.addOption({
                 'font-size'   : '20px'  ,
                 'font-weight' : '100'   ,
                 'min-width'   : '250px' ,
@@ -49,16 +49,18 @@ class Menubar extends Menuhdr {
             });
             
             $('#' + this.getId() + ' .menu-hdr').css('height'  , $(window).height() + 'px');
+            $('#' + this.getId() + ' .menu-hdr').css('position', 'fixed');
+            $('#' + this.getId() + ' .menu-hdr').css('z-index' , '100');
             
             for (var key in this.option) {
-                if ('height' == key) {
+                if ('height' == this.option[key][0]) {
                     $('#' + this.getId() + ' .menu-hdr').css(
                         'top',
-                        $(window).height() - this.option[key] + 'px'
+                        $(window).height() - this.option[key][1] + 'px'
                     );
-                    $('#' + this.getId() + ' .menu-hdr').css(key, this.option[key] + 'px');
+                    $('#' + this.getId() + ' .menu-hdr').css(this.option[key][0], this.option[key][1] + 'px');
                 } else {
-                    $('#' + this.getId() + ' .menu-hdr').css(key, this.option[key]);
+                    $('#' + this.getId() + ' .menu-hdr').css(this.option[key][0], this.option[key][1]);
                 }
             }
             $('#' + this.getId() + ' .menu-close').click(function(){

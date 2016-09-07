@@ -8,6 +8,7 @@ class Menu extends Contents {
             );
             hdr.setMenu(this);
             this.sel_idx = 0;
+            this.sel_evt = new Array();
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
@@ -52,6 +53,23 @@ class Menu extends Contents {
             //    idx
             );
             this.sel_idx = idx;
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
+    
+    setSelectEvt(name, func, prm) {
+        try {
+            this.sel_evt.push({
+                name : name,
+                func : function() {
+                    try {
+                        func(prm);
+                    } catch (e) {
+                        console.error(e.stack);
+                    }
+                }
+            });
         } catch (e) {
             throw new Error(e.stack + '\n');
         }

@@ -38,10 +38,9 @@ class Button extends Contents {
             tetraring.loader.css('./css/parts/button.css');
             for (var key in this.option) {
                 if ('sel-color' == key) {
-                    //$('#' + this.getId() + ' button:hover').css('border-color', this.option[key]);
-                    //$('#' + this.getId() + ' button:hover').css('border-width', '3px');
+                    
                 } else {
-                    $('#' + this.getId() + ' button').css(key, this.option[key]);
+                    $('#' + this.getId() + ' button').css(this.option[key][0], this.option[key][1]);
                 }
             }
             if (null !== this.clickEvt) {

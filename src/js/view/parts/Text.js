@@ -34,7 +34,7 @@ class Text extends Contents {
             super.init(tgt);
             $('#' + this.getId()).html('<div>' + this.conts + '</div>');
             for (var key in this.option) {
-                $('#' + this.getId() + ' div').css(key, this.option[key]);
+                $('#' + this.getId() + ' div').css(this.option[key][0], this.option[key][1]);
             }
         } catch (e) {
             throw new Error(e.stack + '\n');

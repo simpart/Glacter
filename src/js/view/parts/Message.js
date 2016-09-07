@@ -10,7 +10,6 @@ class Message extends Text {
     
     init(tgt) {
         try {
-            //this.setOption
             super.init(tgt);
             $('#' + this.getId() + ' div').attr('class', 'message');
             tetraring.loader.css('./css/parts/message.css');

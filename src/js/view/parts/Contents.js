@@ -6,7 +6,7 @@ class Contents {
                 throw new Error('invalid parameter');
             }
             this.conts  = cnt;
-            this.option = null;
+            this.option = new Array();
             this.inited = false;
             this.id     = null;
             /* this.child  = chd; */
@@ -15,9 +15,11 @@ class Contents {
         }
     }
     
-    setOption(opt) {
+    addOption(opt) {
         try {
-            this.option = opt;
+            for (var key in opt) {
+                this.option.push([key, opt[key]]);
+            }
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
@@ -25,6 +27,9 @@ class Contents {
     
     init(tgt) {
         try {
+            if (true === this.inited) {
+                return;
+            }
             if ((null == tgt) || ('' == tgt)) {
                 throw new Error('invalid parameter');
             }
