@@ -18,10 +18,18 @@ class Message extends Text {
         }
     }
     
-    showMessage(msg) {
+    setMessage(msg) {
         try {
             this.conts = msg;
             $('#' + this.getId() + ' .message').html(msg);
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
+    
+    showMessage(msg) {
+        try {
+            this.setMessage(msg);
             if ('none' == $('#' + this.getId()).css('display')) {
                 this.setVisible(true);
             }

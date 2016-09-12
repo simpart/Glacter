@@ -9,8 +9,8 @@ $(function() {
                     if (0 === new_cnt.member.length) {
                         var new_form = new Form();
                         
-                        new_form.addForm(new Input('Title : '));
-                        new_form.addForm(new Input('Tag : '));
+                        new_form.addForm(new Input('Title'));
+                        new_form.addForm(new TagInput('Tag'));
                         
                         var txt = new TextArea('');
                         txt.addOption({
@@ -22,7 +22,7 @@ $(function() {
                         
                         var add_btn = new Button('Add');
                         add_btn.setClickEvt(function(){
-                            app.item.addItem();
+                            app.item.addItem(new_form);
                         });
                         new_form.addForm(add_btn);
                         
@@ -37,10 +37,13 @@ $(function() {
                     throw new Error(e.stack + '\n');
                 }
             },
-            addItem  : function() {
+            addItem  : function(new_form) {
                 try {
-                    alert("add");
-                    //app.item.
+                    var val   = new_form.getValue();
+                    var title = val[0];
+                    var tag   = val[1];
+                    var item  = val[2];
+                    
                 } catch (e) {
                     throw new Error(e.stack + '\n');
                 }
@@ -52,5 +55,4 @@ $(function() {
         console.error(e.stack);
     }
 });
-
-
+/* end of file */

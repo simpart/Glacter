@@ -1,8 +1,10 @@
 
 class TextArea extends Contents {
-    constructor(txt) {
+    constructor(txt,lbl) {
         try {
             super(txt);
+            this.label    = lbl;
+            this.not_null = true;
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
@@ -13,23 +15,23 @@ class TextArea extends Contents {
             super.init(tgt);
             $('#' + this.getId()).html('<textarea>' + this.conts + '</textarea>');
             for (var key in this.option) {
-                $('#' + this.getId() + ' textarea').css(this.option[key][0], this.option[key][1]);
+                if ('not_null' == this.option[key][0]) {
+                    this.not_null = this.option[key][1];
+                } else {
+                    $('#' + this.getId() + ' textarea').css(this.option[key][0], this.option[key][1]);
+                }
             }
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
     }
     
-//    setVisible(flg) {
- //       try {
-//            if (true === flg) {
-//                $('#' + this.name + 'text').fadeIn();
-//            } else if (false === flg) {
-//                $('#' + this.name + 'text').fadeOut();
-//            }
- //       } catch (e) {
- //           throw new Error(e.stack + '\n');
- //       }
- //   }
+    getValue() {
+        try {
+            return $('#' + this.getId() + ' textarea').val();
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
 }
 /* end of file */

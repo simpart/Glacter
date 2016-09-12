@@ -47,6 +47,7 @@ class Menubar extends Menuhdr {
             $('#' + this.getId() + ' .menu-bar').click(function(){
                 own.menuVisible(true);
             });
+            $('#' + this.getId() + ' .menu-bar').css('float', 'left');
             
             $('#' + this.getId() + ' .menu-hdr').css('height'  , $(window).height() + 'px');
             $('#' + this.getId() + ' .menu-hdr').css('position', 'fixed');

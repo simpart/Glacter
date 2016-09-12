@@ -74,10 +74,11 @@ class Form extends Contents {
     
     chkValue() {
         try {
-            if( ('' == this.conts[0].getValue()) &&
-                ('' == this.conts[1].getValue()) ) {
-                this.error.showMessage('empty value');
-                return false;
+            var loop = 0;
+            for(loop=0; loop < this.conts.length-1 ;loop++) {
+                if (false === this.conts[loop].chkValue(this.error)) {
+                    return false;
+                }
             }
             return true;
         } catch (e) {
@@ -87,10 +88,27 @@ class Form extends Contents {
     
     getValue(idx) {
         try {
-            if ((0 > idx) || ((this.conts.length-1) <= idx)) {
+            var pidx = idx || null;
+            if ((0 > pidx) || ((this.conts.length-1) <= pidx)) {
                 throw new Error('invalid parameter');
             }
-            return this.conts[idx].getValue();
+            if (null === pidx) {
+                var ret_val = new Array();
+                var loop    = 0;
+                for(loop=0; loop < this.conts.length-1 ;loop++) {
+                    ret_val.push(this.conts[loop].getValue());
+                }
+                return ret_val;
+            }
+            return this.conts[pidx].getValue();
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
+    
+    visibleError(flg) {
+        try {
+            this.error.setVisible(flg);
         } catch (e) {
             throw new Error(e.stack + '\n');
         }

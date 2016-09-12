@@ -35,10 +35,10 @@ $(function(){
         
         app.top.getForm = function () {
             try {
-                var form = new Form('srch');
+                var form = new SearchForm('srch');
                 
-                form.addForm(new Input('Keyword : '));
-                form.addForm(new Input('Tag : '));
+                form.addForm(new Input('Keyword'));
+                form.addForm(new Input('Tag'));
                 var srch_btn = new Button('Search');
                 srch_btn.setClickEvt(function(){
                     try {
@@ -80,6 +80,7 @@ $(function(){
         app.top.showSrchRet = function(form) {
             try {
                 if(false === form.chkValue()) {
+                    form.visibleError(true);
                     return;
                 }
                 if (null === app.search) {
@@ -122,9 +123,11 @@ $(function(){
                         function() {
                             try {
                                 tetraring.loader.js(
-                                    ['./src/js/view/parts/Titlehdr.js',
-                                     './src/js/view/parts/Menubar.js' ,
-                                     './src/js/view/parts/SlideMenu.js'],
+                                    ['./src/js/view/parts/Titlehdr.js'  ,
+                                     './src/js/view/parts/Menubar.js'   ,
+                                     './src/js/view/parts/SlideMenu.js' ,
+                                     './src/js/view/parts/SearchForm.js',
+                                     './src/js/view/parts/TagInput.js'],
                                     function() {
                                         try {
                                             app.top.showConts();
