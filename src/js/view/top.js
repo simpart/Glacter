@@ -127,6 +127,7 @@ $(function(){
                                      './src/js/view/parts/Menubar.js'   ,
                                      './src/js/view/parts/SlideMenu.js' ,
                                      './src/js/view/parts/SearchForm.js',
+                                     './src/js/view/parts/ItemForm.js'  ,
                                      './src/js/view/parts/TagInput.js'],
                                     function() {
                                         try {

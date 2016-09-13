@@ -7,7 +7,7 @@ try {
         var app  = {};
         app.tringCallback = function(func) {
             try {
-                if (false === tetraring.conf.loaded) {
+                if (false === tetraring.mng.isloaded) {
                     setTimeout(function(){
                         try {
                             app.tringCallback(func);

@@ -7,12 +7,12 @@ $(function() {
                 try {
                     var new_cnt = item.member[1];
                     if (0 === new_cnt.member.length) {
-                        var new_form = new Form();
+                        var new_form = new ItemForm();
                         
                         new_form.addForm(new Input('Title'));
                         new_form.addForm(new TagInput('Tag'));
                         
-                        var txt = new TextArea('');
+                        var txt = new TextArea('','item contents');
                         txt.addOption({
                             'width'     : '500px',
                             'height'    : '250px',
@@ -39,6 +39,10 @@ $(function() {
             },
             addItem  : function(new_form) {
                 try {
+                    if (false === new_form.chkValue()) {
+                        new_form.visibleError(true);
+                        return;
+                    }
                     var val   = new_form.getValue();
                     var title = val[0];
                     var tag   = val[1];

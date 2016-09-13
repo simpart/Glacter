@@ -1,0 +1,23 @@
+create database glacter;
+
+GRANT ALL ON glacter.* TO glacter@localhost IDENTIFIED BY 'glacter';
+
+alter database glacter character set utf8;
+
+create table items (
+    id     int unsigned primary key auto_increment ,
+    title  varchar(128) not null      ,
+    conts  text         not null      ,
+    remark text         null
+);
+
+create table tags (
+    id    int unsigned primary key auto_increment ,
+    tag   varchar(64)  not null
+);
+
+create table item_tag (
+    id   int unsigned primary key auto_increment,
+    item int unsigned,
+    foreign key(item) references items(id)
+);

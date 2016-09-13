@@ -33,5 +33,18 @@ class TextArea extends Contents {
             throw new Error(e.stack + '\n');
         }
     }
+    
+    chkValue(msg) {
+       try {
+            if ((null == this.getValue()) ||
+                (''   == this.getValue())) {
+                msg.setMessage(this.label + ' is null');
+                return false;
+            }
+            return true;
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
 }
 /* end of file */
