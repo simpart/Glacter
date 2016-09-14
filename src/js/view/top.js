@@ -5,6 +5,7 @@ $(function(){
         app.top    = {};
         app.search = null;
         app.item   = null;
+        app.tags   = null;
         app.menu   = null;
         app.top.showConts = function() {
             try {
@@ -23,7 +24,8 @@ $(function(){
                     'height'     : $(window).height() - 70
                 });
                 menu.addConts('S e a r c h', app.top.getForm());
-                menu.addConts('I t e m', app.top.getItem());
+                menu.addConts('I t e m'    , app.top.getItem());
+                menu.addConts('T a g s'    , app.top.getTagConts());
                 menu.init('main');
                 menu.setVisible(true);
                 app.menu = menu;
@@ -77,6 +79,47 @@ $(function(){
             }
         }
         
+        app.top.getTagConts = function() {
+            try {
+               var tag_cnt = new ContsGroup();
+               tag_cnt.addConts(new ContsTitle('T a g'));
+               var btn     = new Button('New');
+               btn.setClickEvt(function(){
+                   
+               });
+               tag_cnt.addConts(btn);
+               
+               var new_form = new Form();
+               new_form.addForm(new Input('Tag name'));
+               var add_btn  = new Button('add');
+               add_btn.setClickEvt(function(){
+                   try {
+                       /* switch to search result */
+                       app.top.showSrchRet(form);
+                   } catch (e) {
+                       console.error(e.stack);
+                   }
+               });
+               new_form.addForm(add_btn);
+               tag_cnt.addConts(new_form);
+               tag_cnt.setIgnoreVisible(tag_cnt.member.length-1, true);
+               
+               var table   = new Table(['Name','','']);
+               tetraring.loader.js(
+                   ['./src/js/view/tags.js'],
+                   function(tbl) {
+                       app.tags.setTag(tbl);
+                   },
+                   table
+               );
+               tag_cnt.addConts(table);
+               //tag_cnt.setIgnoreVisible(tag_cnt.member.length-1, true);
+               return tag_cnt;
+            } catch (e) {
+                throw new Error(e.stack + '\n');
+            }
+        }
+        
         app.top.showSrchRet = function(form) {
             try {
                 if(false === form.chkValue()) {
@@ -86,7 +129,6 @@ $(function(){
                 if (null === app.search) {
                     tetraring.loader.js(
                         ['./src/js/view/parts/ContsTitle.js',
-                         './src/js/view/parts/Table.js'     ,
                          './src/js/view/search.js'],
                         function() {
                             try {
@@ -118,7 +160,9 @@ $(function(){
                          './src/js/view/parts/Form.js'           ,
                          './src/js/view/parts/Menu.js'           ,
                          './src/js/view/parts/Menuhdr.js'        ,
+                         './src/js/view/parts/Table.js'          ,
                          './src/js/lib/velocity/velocity.min.js' ,
+                         './src/js/view/parts/ContsTitle.js'     ,
                          './src/js/view/parts/ContsGroup.js' ],
                         function() {
                             try {

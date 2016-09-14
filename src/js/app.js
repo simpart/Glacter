@@ -1,5 +1,5 @@
 /**
- * @file 
+ * @file app.js
  */
 
 try {
