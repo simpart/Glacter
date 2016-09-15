@@ -12,13 +12,21 @@ $(function() {
                         new_form.addForm(new Input('Title'));
                         new_form.addForm(new TagInput('Tag'));
                         
-                        var txt = new TextArea('','item contents');
+                        var txt = new TextArea('contents:','item contents');
                         txt.addOption({
                             'width'     : '500px',
                             'height'    : '250px',
                             'font-size' : '25px'
                         });
                         new_form.addForm(txt);
+                        var dsc = new TextArea('description:','item desc');
+                        dsc.addOption({
+                            'width'     : '500px',
+                            'height'    : '250px',
+                            'font-size' : '25px'
+                        });
+                        new_form.addForm(dsc);
+                        
                         
                         var add_btn = new Button('Add');
                         add_btn.setClickEvt(function(){

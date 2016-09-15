@@ -8,15 +8,13 @@ try {
                    'glacter'  ,
                    'glacter'
                );
-    $tag     = $dbc->select('tags',null);
-    $ret_msg = null;
-    if (null !== $tag) {
-        $ret_msg = array();
-        foreach ($tag as $elm) {
-            $ret_msg[] = $elm['tag'];
-        }
-    }
-    tetraring\rest\resp($ret_msg);
+    $tag = $dbc->insert(
+               'tags',
+               array('tag' => '"' . $_POST['tag'] . '"')
+           );
+    
+    tetraring\rest\resp(null);
 } catch (Exception $e) {
     tetraring\rest\errResp($e->getMessage());;
 }
+/* end of file */

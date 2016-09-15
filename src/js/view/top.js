@@ -84,18 +84,23 @@ $(function(){
                var tag_cnt = new ContsGroup();
                tag_cnt.addConts(new ContsTitle('T a g'));
                var btn     = new Button('New');
+               btn.addOption({
+                   'position'      : 'relative',
+                   'left'          : '20%'     ,
+                   'margin-top'    : '10px'    ,
+                   'margin-bottom' : '10px'
+               });
                btn.setClickEvt(function(){
-                   
+                   new_form.setVisible(true);
                });
                tag_cnt.addConts(btn);
                
                var new_form = new Form();
                new_form.addForm(new Input('Tag name'));
                var add_btn  = new Button('add');
-               add_btn.setClickEvt(function(){
+               add_btn.setClickEvt(function() {
                    try {
-                       /* switch to search result */
-                       app.top.showSrchRet(form);
+                       app.tags.addTag(new_form);
                    } catch (e) {
                        console.error(e.stack);
                    }
@@ -104,14 +109,14 @@ $(function(){
                tag_cnt.addConts(new_form);
                tag_cnt.setIgnoreVisible(tag_cnt.member.length-1, true);
                
-               var table   = new Table(['Name','','']);
-               tetraring.loader.js(
-                   ['./src/js/view/tags.js'],
-                   function(tbl) {
-                       app.tags.setTag(tbl);
-                   },
-                   table
-               );
+               var table   = new Table(['Tag Name','','']);
+               table.addOption({
+                   'position'      : 'relative',
+                   'left'          : '20%'     ,
+                   'margin-top'    : '10px'    ,
+                   'margin-bottom' : '10px'
+               });
+               app.tags.loadTag(table);
                tag_cnt.addConts(table);
                //tag_cnt.setIgnoreVisible(tag_cnt.member.length-1, true);
                return tag_cnt;
@@ -163,7 +168,8 @@ $(function(){
                          './src/js/view/parts/Table.js'          ,
                          './src/js/lib/velocity/velocity.min.js' ,
                          './src/js/view/parts/ContsTitle.js'     ,
-                         './src/js/view/parts/ContsGroup.js' ],
+                         './src/js/view/parts/ContsGroup.js'     ,
+                         './src/js/view/tags.js' ],
                         function() {
                             try {
                                 tetraring.loader.js(
