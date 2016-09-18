@@ -13,7 +13,15 @@ class Button extends Contents {
     setClickEvt(func) {
         try {
             if (true === this.inited) {
-                $('#' + this.getId()).click(func);
+                this.clickEvt = func;
+                var own_btn = this;
+                $('#' + this.getId()).click(function(){
+                    try {
+                        func(own_btn);
+                    } catch (e) {
+                        console.error(e.stack);
+                    }
+                });
             } else {
                 this.clickEvt = func;
             }
@@ -44,7 +52,15 @@ class Button extends Contents {
                 }
             }
             if (null !== this.clickEvt) {
-                $('#' + this.getId() + ' button').click(this.clickEvt);
+                var own_btn  = this;
+                var clk_func = this.clickEvt;
+                $('#' + this.getId() + ' button').click(function(){
+                    try {
+                        clk_func(own_btn);
+                    } catch (e) {
+                        console.error(e.stack);
+                    }
+                });
             }
         } catch (e) {
             throw new Error(e.stack + '\n');

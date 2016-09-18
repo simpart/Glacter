@@ -23,8 +23,8 @@ $(function(){
                     'background' : '#257182',
                     'height'     : $(window).height() - 70
                 });
-                menu.addConts('S e a r c h', app.top.getForm());
-                menu.addConts('I t e m'    , app.top.getItem());
+                menu.addConts('I t e m', app.top.getForm());
+                //menu.addConts('I t e m'    , app.top.getItem());
                 menu.addConts('T a g s'    , app.top.getTagConts());
                 menu.init('main');
                 menu.setVisible(true);
@@ -37,43 +37,42 @@ $(function(){
         
         app.top.getForm = function () {
             try {
-                var form = new SearchForm('srch');
+                var ret_val = new ContsGroup();
+                var new_btn = new Button('New Item');
+                new_btn.addOption({
+                    'position' : 'relative',
+                    'left'     : '15px'
+                });
+                new_btn.setClickEvt(function(){
+                    window.open('./new_item.html');
+                });
+                ret_val.addConts(new_btn);
                 
+                var form = new SearchForm('srch');
                 form.addForm(new Input('Keyword'));
-                form.addForm(new Input('Tag'));
+                form.addForm(new TagInput('Tag'));
                 var srch_btn = new Button('Search');
                 srch_btn.setClickEvt(function(){
                     try {
                         /* switch to search result */
-                        app.top.showSrchRet(form);
+                        tetraring.loader.js(
+                            ['./src/js/view/search.js'],
+                            function() {
+                                try {
+                                    app.search.showResult(form);
+                                } catch (e) {
+                                    console.error(e.stack);
+                                }
+                            },null
+                        );
                     } catch (e) {
                         console.error(e.stack);
                     }
                 });
                 form.addForm(srch_btn);
-                return form;
-            } catch (e) {
-                throw new Error(e.stack + '\n');
-            }
-        }
-        
-        app.top.getItem = function() {
-            try {
-                var item    = new ContsGroup();
-                var new_btn = new Button('New Item');
-                new_btn.setClickEvt(function(){
-                    tetraring.loader.js(
-                        ['./src/js/view/parts/TextArea.js',
-                         './src/js/view/items.js'],
-                        function(item) {
-                            app.item.newItem(item);
-                        },item
-                    );
-                });
-                item.addConts(new_btn);
-                item.addConts(new ContsGroup());  // item creater
-                item.addConts(new ContsGroup());  // item viewer
-                return item;
+                ret_val.addConts(form);
+                
+                return ret_val;
             } catch (e) {
                 throw new Error(e.stack + '\n');
             }
@@ -125,32 +124,6 @@ $(function(){
             }
         }
         
-        app.top.showSrchRet = function(form) {
-            try {
-                if(false === form.chkValue()) {
-                    form.visibleError(true);
-                    return;
-                }
-                if (null === app.search) {
-                    tetraring.loader.js(
-                        ['./src/js/view/parts/ContsTitle.js',
-                         './src/js/view/search.js'],
-                        function() {
-                            try {
-                                app.search.showList(form.getValue(0));
-                            } catch (e) {
-                                console.error(e.stack);
-                            }
-                        },null
-                    );
-                } else {
-                    app.search.showList(form.getValue(0));
-                }
-            } catch (e) {
-                throw new Error(e.stack + '\n');
-            }
-        }
-        
         tetraring.loader.js(
             ['./src/js/view/parts/Contents.js'],
             function() {
@@ -173,11 +146,12 @@ $(function(){
                         function() {
                             try {
                                 tetraring.loader.js(
-                                    ['./src/js/view/parts/Titlehdr.js'  ,
-                                     './src/js/view/parts/Menubar.js'   ,
-                                     './src/js/view/parts/SlideMenu.js' ,
-                                     './src/js/view/parts/SearchForm.js',
-                                     './src/js/view/parts/ItemForm.js'  ,
+                                    ['./src/js/view/parts/Titlehdr.js'   ,
+                                     './src/js/view/parts/ContsTitle.js' ,
+                                     './src/js/view/parts/Menubar.js'    ,
+                                     './src/js/view/parts/SlideMenu.js'  ,
+                                     './src/js/view/parts/SearchForm.js' ,
+                                     './src/js/view/parts/ItemForm.js'   ,
                                      './src/js/view/parts/TagInput.js'],
                                     function() {
                                         try {

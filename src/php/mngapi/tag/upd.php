@@ -8,18 +8,19 @@ try {
                    'glacter'  ,
                    'glacter'
                );
-    $ret = $dbc->select(
+    $sel = $dbc->select(
                'tags',
-               array('tag' => '"' . $_POST['tag'] . '"')
+               array('tag' => '"' . $_POST['old_tag'] . '"')
            );
-    if (null !== $ret) {
-        throw new Exception($_POST['tag'] . ' is already exists');
+    if (null === $sel) {
+        throw new Exception('could not find ' . $_POST['old_tag']);
     }
     
-    $tag = $dbc->insert(
-               'tags',
-               array('tag' => '"' . $_POST['tag'] . '"')
-           );
+    $dbc->update(
+              'tags',
+              array('tag' => '"' . $_POST['new_tag'] . '"'),
+              array('id' => $sel[0]['id'])
+          );
     
     tetraring\rest\resp(null);
 } catch (Exception $e) {

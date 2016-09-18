@@ -19,5 +19,7 @@ create table tags (
 create table item_tag (
     id   int unsigned primary key auto_increment,
     item int unsigned,
-    foreign key(item) references items(id)
+    tag  int unsigned,
+    foreign key(item) references items(id),
+    foreign key(tag)  references tags(id)
 );

@@ -9,6 +9,7 @@ class Contents {
             this.option = new Array();
             this.inited = false;
             this.id     = null;
+            this.temp   = null;
             /* this.child  = chd; */
         } catch (e) {
             throw new Error(e.stack + '\n');

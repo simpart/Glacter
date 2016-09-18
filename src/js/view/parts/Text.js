@@ -41,6 +41,14 @@ class Text extends Contents {
         }
     }
     
+    update(txt) {
+      try {
+          $('#' + this.getId() + ' div').html(txt);
+          this.conts = txt;
+      } catch (e) {
+            throw new Error(e.stack + '\n');
+      }
+    }
 //    setVisible(flg) {
  //       try {
 //            if (true === flg) {

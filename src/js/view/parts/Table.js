@@ -29,6 +29,14 @@ class Table extends Contents {
         }
     }
     
+    delRow(idx) {
+        try {
+            $('#' + this.getId() + ' table tbody tr').eq(idx).remove();
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
+    
     init(tgt) {
         try {
             super.init(tgt);

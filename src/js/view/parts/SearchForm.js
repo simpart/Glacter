@@ -5,9 +5,10 @@ class SearchForm extends Form {
                 (false == this.conts[1].chkValue(this.error))) {
                 var input1 = this.conts[0].label;
                 var input2 = this.conts[1].label;
-                this.error.setMessage(input1 + ' or ' + input2 + ' is null');
+                this.error.showMessage(input1 + ' or ' + input2 + ' is null');
                 return false;
             }
+            this.error.setVisible(false);
             return true;
         } catch (e) {
             throw new Error(e.stack + '\n');

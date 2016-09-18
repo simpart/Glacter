@@ -20,9 +20,8 @@ class Menubar extends Menuhdr {
             });
             var menuhdr = this;
             var menu = this.menu;
-            menu_elm.setClickEvt(function() {
-                var id  = $(this).parent('div').attr('id');
-                var idx = menuhdr.getMenuIdx(id);
+            menu_elm.setClickEvt(function(btn) {
+                var idx = menuhdr.getMenuIdx(btn.getId());
                 menu.notifySelect(idx);
             });
             this.conts.push(menu_elm);
