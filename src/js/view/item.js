@@ -5,6 +5,8 @@ $(function(){
         app.item   = {};
         app.item.showConts = function() {
             try {
+                var get_prm = tetraring.url.getParam();
+                
                 /* show header */
                 var ttl_hdr = new TitleHeader('G L A C T E R');
                 ttl_hdr.addOption({
@@ -16,7 +18,10 @@ $(function(){
                 
                 var edit = new Button('Edit');
                 edit.addOption({
-                    'base_path' : '../'
+                    'base_path'  : '../'      ,
+                    'position'   : 'relative' ,
+                    'left'       : '32%'      ,
+                    'margin-top' : '20px'
                 });
                 edit.init('main');
                 edit.setVisible(true);
