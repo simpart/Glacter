@@ -1,0 +1,5 @@
+
+tbody tr:hover {
+    background : #d5e9ef;
+    cursor : pointer;
+}

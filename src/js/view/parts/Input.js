@@ -3,9 +3,7 @@ class Input extends Contents {
     constructor(lbl) {
         try {
             super(lbl + ' : ');
-            tetraring.loader.css('./src/js/lib/FlowupLabels.js/src/jquery.FlowupLabels.css');
-            
-            this.label = lbl;
+            this.label    = lbl;
             this.not_null = true;
         } catch (e) {
             throw new Error(e.stack + '\n');
@@ -15,9 +13,9 @@ class Input extends Contents {
     init(tgt) {
         try {
             super.init(tgt);
-            
+            tetraring.loader.css(this.base_path + 'src/js/lib/FlowupLabels.js/src/jquery.FlowupLabels.css');
             tetraring.loader.html(
-                './html/parts/input.html',
+                this.base_path + 'html/parts/input.html',
                 this.getId()
             );
             

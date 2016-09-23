@@ -22,8 +22,10 @@ $(function() {
                                     return;
                                 }
                                 if (null === ret.message) {
+                                    form.error.showMessage('not hit item');
                                     return;
                                 }
+                                form.error.setVisible(false);
                                 app.search.showTable(ret.message);
                                 //for(var key in ret.message) {
                                 //    alert(tetraring.debug.dumpObj(ret.message[key]));
@@ -33,33 +35,36 @@ $(function() {
                             }
                         },null 
                     );
-                    
-                    //if (null === app.search.table) {
-                    //    var id = app.menu.conts[1][0].getId();
-                    //    var ret_ttl = new ContsTitle('Search Result');
-                    //    ret_ttl.init(id);
-                    //    ret_ttl.setVisible(true);
-                    //    
-                    //    var ret_tbl = new Table(['ID', 'Title', 'Tag', 'Description']);
-                    //    ret_tbl.init(id);
-                    //    ret_tbl.setVisible(true);
-                    //    app.search.table = ret_tbl;
-                    //    return;
-                    //}
-                    
                 } catch (e) {
                     throw new Error(e.stack + '\n');
                 }
             },
-            showTable : function(ret) {
+            showTable : function(ret_msg) {
                 try {
                     if (null === app.search.table) {
-                        var tbl = new Table(['ID', 'Title', 'Description']);
-                        
-                        //tbl.init();
+                        var tbl = new Table(['ID', 'Title', 'Contents', 'Description']);
+                        tbl.addOption({
+                            'position'     : 'relative',
+                            'left'         : '30%'     ,
+                            'margin-top'   : '10px'    ,
+                            'margin-bottom': '10px'
+                        });
+                        tbl.init(app.menu.conts[1][0].getId());
+                        for(var key in ret_msg) {
+                            tbl.addRow([
+                                new Text(ret_msg[key]['id']),
+                                new Text(ret_msg[key]['title']),
+                                new Text(ret_msg[key]['conts']),
+                                new Text(ret_msg[key]['remark'])
+                            ]);
+                        }
+                        tbl.setRowClickEvt(function(tbl,row_idx) {
+                            window.open('./item?id='+tbl.conts.rows[row_idx-1][0].conts);
+                        });
+                        tbl.setVisible(true);
                         
                     } else {
-                        
+                        //tbl.
                     }
                 } catch (e) {
                     throw new Error(e.stack + '\n');

@@ -34,7 +34,8 @@ class Form extends Contents {
                 'margin-left'  : (padleft) + 'px' ,
                 'background'   : '#ffc8d5',
                 'border-color' : 'red'    ,
-                'border-width' : '1px'
+                'border-width' : '1px'    ,
+                'base_path'    : this.base_path
             });
             this.error.init(this.getId());
             

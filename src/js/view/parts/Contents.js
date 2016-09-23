@@ -5,11 +5,12 @@ class Contents {
             if (null === cnt) {
                 throw new Error('invalid parameter');
             }
-            this.conts  = cnt;
-            this.option = new Array();
-            this.inited = false;
-            this.id     = null;
-            this.temp   = null;
+            this.conts     = cnt;
+            this.option    = new Array();
+            this.inited    = false;
+            this.id        = null;
+            this.temp      = null;
+            this.base_path = './';
             /* this.child  = chd; */
         } catch (e) {
             throw new Error(e.stack + '\n');
@@ -19,7 +20,11 @@ class Contents {
     addOption(opt) {
         try {
             for (var key in opt) {
-                this.option.push([key, opt[key]]);
+                if ('base_path' == key) {
+                    this.base_path = opt[key];
+                } else { 
+                    this.option.push([key, opt[key]]);
+                }
             }
         } catch (e) {
             throw new Error(e.stack + '\n');

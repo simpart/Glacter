@@ -12,7 +12,7 @@ class Message extends Text {
         try {
             super.init(tgt);
             $('#' + this.getId() + ' div').attr('class', 'message');
-            tetraring.loader.css('./css/parts/message.css');
+            tetraring.loader.css(this.base_path + 'css/parts/message.css');
         } catch (e) {
             throw new Error(e.stack + '\n');
         }

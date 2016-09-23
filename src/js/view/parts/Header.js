@@ -41,7 +41,7 @@ class Header extends Contents {
         try {
             super.init(tgt);
             tetraring.loader.html(
-                './html/parts/header.html' ,
+                this.base_path + '/html/parts/header.html' ,
                 this.getId()
             );
             

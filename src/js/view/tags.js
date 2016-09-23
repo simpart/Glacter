@@ -35,8 +35,8 @@ $(function() {
                     });
                     del.addOption({'min-width' : '60px'});
                     tbl.addRow([
-                        new Text(tag),
-                        edit,
+                        new Text(tag) ,
+                        edit          ,
                         del
                     ]);
                 } catch (e) {

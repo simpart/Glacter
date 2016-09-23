@@ -43,7 +43,7 @@ class Button extends Contents {
         try {
             super.init(tgt);
             $('#' + this.getId()).append('<button class=\'c-btn-ujarak\'>'+ this.conts +'</button>');
-            tetraring.loader.css('./css/parts/button.css');
+            tetraring.loader.css(this.base_path + 'css/parts/button.css');
             for (var key in this.option) {
                 if ('sel-color' == key) {
                     

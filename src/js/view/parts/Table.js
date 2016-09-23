@@ -6,6 +6,7 @@ class Table extends Contents {
                 head : hdr,
                 rows : new Array()
             });
+            this.func = null;
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
@@ -24,6 +25,21 @@ class Table extends Contents {
                 row[key].setVisible(true);
                 td_len++;
             }
+            var own_tbl = this;
+            $('#' + this.getId() + ' table tbody tr').click(function() {
+                var idx = $("tr").index(this);
+                if (null !== own_tbl.func) {
+                    own_tbl.func(own_tbl, idx);
+                }
+            });
+        } catch (e) {
+            throw new Error(e.stack + '\n');
+        }
+    }
+    
+    setRowClickEvt(func) {
+        try {
+            this.func = func;
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
@@ -47,13 +63,14 @@ class Table extends Contents {
                 $('#' + this.getId() + ' thead tr').append('<th><div>'+ this.conts.head[key] +'</div></th>');
             }
             $('#' + this.getId() + ' thead tr th').css('font-size', '20px');
-            $('#' + this.getId() + ' thead tr th').css('padding', '10px');
+            $('#' + this.getId() + ' thead tr th').css('padding'  , '10px');
             $('#' + this.getId() + ' table').append('<tbody></tbody>');
-            //$('#' + this.getId() + ' thead tr th').css('border-bottom', 'solid 1px black');
             
             for (var key in this.option) {
                 $('#' + this.getId()).css(this.option[key][0], this.option[key][1]);
             }
+            $('#' + this.getId() + ' table').css('border-bottom', 'solid 1px');
+            tetraring.loader.css('./css/parts/table.css');
         } catch (e) {
             throw new Error(e.stack + '\n');
         }
