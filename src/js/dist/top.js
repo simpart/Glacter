@@ -63,26 +63,563 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(1);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file   Text.js
+	 * @brief  Text Component for mofron
+	 * @author simpart
+	 */
+	mofron.comp.Text = function (_mofron$Component) {
+	    _inherits(_class, _mofron$Component);
+
+	    /**
+	     * initialize text component
+	     *
+	     * @param prm : (string) text contents
+	     * @param opt : (object) component option
+	     */
+	    function _class(prm, opt) {
+	        _classCallCheck(this, _class);
+
+	        try {
+	            var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, prm));
+
+	            _this.setBaseName('Text');
+	            _this.name('Text');
+
+	            /* font theme */
+	            _this.m_font = null;
+
+	            /* set option */
+	            if (null !== opt) {
+	                _this.option(opt);
+	            }
+	        } catch (e) {
+	            console.error(e.stack);
+	            throw e;
+	        }
+	        return _this;
+	    }
+
+	    /**
+	     * initialize vdom
+	     * 
+	     * @param prm : (string) text contents
+	     */
+
+
+	    _createClass(_class, [{
+	        key: 'initDomConts',
+	        value: function initDomConts(prm) {
+	            try {
+	                if ('string' != typeof prm) {
+	                    throw new Error('invalid parameter');
+	                }
+
+	                /* init vdom contents */
+	                var text = new mofron.util.Vdom('div', this);
+	                text.text(prm);
+	                this.vdom().addChild(text);
+	                this.target(text);
+
+	                /* set style */
+	                this.size(15);
+
+	                /* set font theme */
+	                var fnt = this.theme().getFont(0);
+	                if (null !== fnt) {
+	                    this.setFontTheme(fnt);
+	                }
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+
+	        /**
+	         * text contents setter/getter
+	         *
+	         * @param val : (string) text contents
+	         * @return (string) text contents
+	         */
+
+	    }, {
+	        key: 'text',
+	        value: function text(val) {
+	            try {
+	                var _val = val === undefined ? null : val;
+	                if (null === _val) {
+	                    return this.target().text();
+	                }
+	                if ('string' !== typeof _val) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.target().text(_val);
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+
+	        /**
+	         * text size setter / getter
+	         *
+	         * @param val : (number) font pixel size (option)
+	         * @return (number) font size
+	         */
+
+	    }, {
+	        key: 'size',
+	        value: function size(val) {
+	            try {
+	                if (undefined === val) {
+	                    /* getter */
+	                    return this.style('font-size');
+	                }
+
+	                if (null === val) {
+	                    this.style('font-size', null);
+	                    return;
+	                }
+	                /* setter */
+	                if ('number' != typeof val) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.style('font-size', val + 'px');
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+
+	        /**
+	         * set link text
+	         *
+	         * @param url : (string) link url
+	         * @param tab : (bool) new tab flag
+	         */
+
+	    }, {
+	        key: 'setLink',
+	        value: function setLink(url, tab) {
+	            try {
+	                var _tab = tab === undefined ? false : tab;
+	                var click = null;
+
+	                if (false === _tab) {
+	                    click = new mofron.event.Click(function () {
+	                        window.location.href = url;
+	                    });
+	                } else {
+	                    click = new mofron.event.Click(function () {
+	                        window.open(url, '_blank');
+	                    });
+	                }
+
+	                this.style('cursor', 'pointer');
+	                this.addEvent(click);
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+
+	        /**
+	         * text color setter/getter
+	         * 
+	         * @param clr : (mofron.util.Color) color object
+	         * @return (string) color (no-parameter)
+	         */
+
+	    }, {
+	        key: 'color',
+	        value: function color(clr) {
+	            try {
+	                var _clr = clr === undefined ? null : clr;
+	                if (null === _clr) {
+	                    return mofron.func.getColorObj(this.style('color'));
+	                }
+	                if ('object' !== (typeof _clr === 'undefined' ? 'undefined' : _typeof(_clr))) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.style('color', _clr.getStyle());
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+
+	        /**
+	         * text font setter/getter
+	         * 
+	         * @param fnt : (mofron.util.Font) font object
+	         * @return (string) font
+	         */
+
+	    }, {
+	        key: 'font',
+	        value: function font(fnt) {
+	            try {
+	                var _fnt = fnt === undefined ? null : fnt;
+	                if (null === _fnt) {
+	                    /* getter */
+	                    return this.m_font;
+	                }
+	                /* setter */
+	                if ('object' !== (typeof _fnt === 'undefined' ? 'undefined' : _typeof(_fnt))) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.style('font-family', _fnt.getStyle());
+	                this.m_font = _fnt;
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+
+	        /**
+	         * set font theme to class name
+	         * 
+	         * @param fnt : (object) font object
+	         */
+
+	    }, {
+	        key: 'setFontTheme',
+	        value: function setFontTheme(fnt) {
+	            try {
+	                var _fnt = fnt === undefined ? null : fnt;
+	                if ('object' !== (typeof _fnt === 'undefined' ? 'undefined' : _typeof(_fnt))) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.m_font = _fnt;
+	                this.target().addClname(fnt.getThemeClass());
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.Component);
+
+/***/ }
+/******/ ]);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file Click.js
+	 * @author simpart
+	 */
+
+	/**
+	 * @class mofron.event.Click
+	 * @brief click event class for component
+	 */
+	mofron.event.Click = function (_mofron$Event) {
+	    _inherits(_class, _mofron$Event);
+
+	    function _class() {
+	        _classCallCheck(this, _class);
+
+	        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	    }
+
+	    _createClass(_class, [{
+	        key: 'eventConts',
+
+	        /**
+	         * add click event to target component.
+	         */
+	        value: function eventConts() {
+	            try {
+	                var _func = this.func;
+	                var _parm = this.parm;
+	                this.target.getDom().addEventListener('click', function () {
+	                    try {
+	                        if (null != _func) {
+	                            _func(_parm);
+	                        }
+	                    } catch (e) {
+	                        console.error(e.stack);
+	                        throw e;
+	                    }
+	                }, false);
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.Event);
+
+/***/ }
+/******/ ]);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file Horizon.js
+	 */
+	mofron.layout.Horizon = function (_mofron$Layout) {
+	    _inherits(_class, _mofron$Layout);
+
+	    function _class() {
+	        _classCallCheck(this, _class);
+
+	        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	    }
+
+	    _createClass(_class, [{
+	        key: 'layout',
+	        value: function layout() {
+	            try {
+	                if (0 !== this.exec_cnt) {
+	                    return;
+	                }
+
+	                this.target.style('display', '-webkit-flex');
+	                this.target.style('display', 'flex');
+	                this.exec_cnt++;
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.Layout);
+
+/***/ }
+/******/ ]);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+//export default const DCOM_APPNAME = 'G L A C T O R';
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
+/**
+ * @file top/ctrl.js
+ * @brief 
+ * @author simpart
+ */
+
+__webpack_require__(14);
+__webpack_require__(7);
+
 try {
     ttrg.init.addLoadEvt(function () {
-        alert('test');
+        var conts = new mofron.tmpl.CenterConts('G L A C T O R');
+
+        conts.addConts(new mofron.comp.FontAwesome('fa-bars', {
+            path: './font/font-awesome-4.7.0/css/font-awesome.min.css'
+        }));
+
+        conts.visible(true);
     });
 } catch (e) {
     console.error(e.stack);
 }
 
 /***/ }),
-/* 1 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /******/ (function(modules) { // webpackBootstrap
@@ -3027,7 +3564,7 @@ try {
 /******/ ]);
 
 /***/ }),
-/* 2 */
+/* 6 */
 /***/ (function(module, exports) {
 
 /******/ (function(modules) { // webpackBootstrap
@@ -3722,15 +4259,1201 @@ __webpack_require__(2);
 /******/ ]);
 
 /***/ }),
-/* 3 */
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(0);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file BandText.js
+	 */
+
+	mofron.comp.FontAwesome = function (_mofron$comp$Text) {
+	    _inherits(_class, _mofron$comp$Text);
+
+	    function _class(prm, opt) {
+	        _classCallCheck(this, _class);
+
+	        try {
+	            var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, prm));
+
+	            _this.name('FontAwesome');
+
+	            _this.m_path = null;
+
+	            if (null !== opt) {
+	                _this.option(opt);
+	            }
+	        } catch (e) {
+	            console.error(e.stack);
+	            throw e;
+	        }
+	        return _this;
+	    }
+
+	    _createClass(_class, [{
+	        key: 'initDomConts',
+	        value: function initDomConts(prm) {
+	            try {
+	                if ('string' !== typeof prm) {
+	                    throw new Error('invalid parameter');
+	                }
+	                _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'initDomConts', this).call(this, '');
+	                this.size(null);
+	                this.target().tag('i');
+	                this.target().addClname('fa ' + prm);
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }, {
+	        key: 'path',
+	        value: function path(pth) {
+	            try {
+	                if (undefined === pth) {
+	                    return this.m_path;
+	                }
+	                if ('string' !== typeof pth) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.m_path = pth;
+	                var link = new mofron.util.HeadConts('link');
+	                link.setAttr('rel', 'stylesheet');
+	                link.setAttr('href', pth);
+	                link.pushTag();
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.comp.Text);
+
+/***/ }
+/******/ ]);
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(2);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file   Header.js
+	 * @brief  Header Component Class
+	 * @author simpart
+	 */
+	mofron.comp.Header = function (_mofron$Component) {
+	    _inherits(_class, _mofron$Component);
+
+	    /**
+	     * initialize component
+	     *
+	     * @param prm (object) Component
+	     */
+	    function _class(prm, opt) {
+	        _classCallCheck(this, _class);
+
+	        try {
+	            var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, prm));
+
+	            _this.setBaseName("Header");
+	            _this.name("Header");
+
+	            _this.m_height = 50;
+	            if (null !== opt) {
+	                _this.option(opt);
+	            }
+	        } catch (e) {
+	            console.error(e.stack);
+	            throw e;
+	        }
+	        return _this;
+	    }
+
+	    _createClass(_class, [{
+	        key: "initDomConts",
+	        value: function initDomConts(prm) {
+	            try {
+	                /* set header dom contents */
+	                var hdr = new mofron.util.Vdom('div', this);
+	                this.vdom().addChild(hdr);
+	                this.vdom().addChild(new mofron.util.Vdom('div', this));
+	                this.target(hdr);
+
+	                /* set style */
+	                hdr.style('width', '100%');
+	                hdr.style('border-bottom', 'solid 1px lightgray');
+	                hdr.style('position', 'fixed');
+
+	                /* set default height */
+	                this.height(this.height());
+
+	                /* child comp is added at horizon layout */
+	                this.addLayout(new mofron.layout.Horizon());
+
+	                /* set child component */
+	                if (null !== prm && 'object' === (typeof prm === "undefined" ? "undefined" : _typeof(prm))) {
+	                    this.addChild(prm);
+	                }
+
+	                /* set theme color */
+	                var clr = this.theme().getColor(0);
+	                if (null != clr) {
+	                    this.color(clr);
+	                }
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }, {
+	        key: "getEventTgt",
+	        value: function getEventTgt() {
+	            try {
+	                return this.vdom();
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+
+	        /**
+	         * set/get header height
+	         *
+	         * @param hei : (int) height (px)
+	         */
+
+	    }, {
+	        key: "height",
+	        value: function height(val) {
+	            try {
+	                if (undefined === val) {
+	                    return this.m_height;
+	                }
+
+	                if ('number' !== typeof val || 0 > val) {
+	                    throw new Error('invalid parameter');
+	                }
+
+	                if (null === this.vdom()) {
+	                    this.m_height = val;
+	                    return;
+	                }
+
+	                this.target().style('height', val + 'px');
+	                this.vdom().getChild(1).style('height', val + 'px');
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+
+	        /**
+	         * set header background color
+	         *
+	         * clr : (object) color
+	         */
+
+	    }, {
+	        key: "color",
+	        value: function color(clr) {
+	            try {
+	                if (undefined === clr) {
+	                    return mofron.func.getColorObj(this.style('background'));
+	                }
+
+	                if (null === clr || 'object' !== (typeof clr === "undefined" ? "undefined" : _typeof(clr))) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.style('background', clr.getStyle());
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.Component);
+
+/***/ }
+/******/ ]);
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(8);
+__webpack_require__(0);
+__webpack_require__(2);
+__webpack_require__(1);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file   pagehdr.js
+	 * @brief  Simpale Page Header Component
+	 * @author simpart
+	 */
+
+	mofron.comp.PageHeader = function (_mofron$comp$Header) {
+	    _inherits(_class, _mofron$comp$Header);
+
+	    function _class(prm, opt) {
+	        _classCallCheck(this, _class);
+
+	        try {
+	            var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, prm));
+
+	            _this.name("PageHeader");
+	        } catch (e) {
+	            console.error(e.stack);
+	            throw e;
+	        }
+	        return _this;
+	    }
+
+	    _createClass(_class, [{
+	        key: 'initDomConts',
+	        value: function initDomConts(prm) {
+	            try {
+	                _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'initDomConts', this).call(this);
+
+	                /* check parameter */
+	                if ('string' != typeof prm) {
+	                    throw new Error('invalid parameter type');
+	                }
+
+	                /* set header style */
+	                this.style('display', 'flex');
+	                this.style('align-items', 'center');
+
+	                /* set header title */
+	                var title = new mofron.comp.Text(prm);
+	                title.size(35);
+	                title.style('margin-left', '20px');
+	                this.addChild(title);
+
+	                /* set reload link */
+	                title.setLink('./');
+
+	                var clr = this.color();
+	                if (null !== clr) {
+	                    var rgb = this.color().getRgba();
+	                    if (290 > rgb[0] + rgb[1] + rgb[2]) {
+	                        title.color(new mofron.util.Color(255, 255, 255));
+	                    }
+	                }
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.comp.Header);
+
+/***/ }
+/******/ ]);
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file backgd.js
+	 */
+
+	mofron.effect.Backgd = function (_mofron$Effect) {
+	    _inherits(_class, _mofron$Effect);
+
+	    function _class() {
+	        _classCallCheck(this, _class);
+
+	        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	    }
+
+	    _createClass(_class, [{
+	        key: 'initEffect',
+	        value: function initEffect(flg, eff) {
+	            try {
+	                if (true === flg) {
+	                    eff.target.style('height', '0%');
+	                    eff.target.style('width', '0%');
+	                    eff.target.style('position', null);
+	                } else {
+	                    eff.target.style('height', '100%');
+	                    eff.target.style('width', '100%');
+	                    eff.target.style('position', 'fixed');
+	                }
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }, {
+	        key: 'effectConts',
+	        value: function effectConts(flg, eff) {
+	            try {
+	                if (true === flg) {
+	                    eff.target.style('height', '100%');
+	                    eff.target.style('width', '100%');
+	                    eff.target.style('position', 'fixed');
+	                } else {
+	                    eff.target.style('height', '0%');
+	                    eff.target.style('width', '0%');
+	                    eff.target.style('position', null);
+	                }
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.Effect);
+
+/***/ }
+/******/ ]);
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file shadow.js
+	 */
+
+	mofron.effect.Shadow = function (_mofron$Effect) {
+	    _inherits(_class, _mofron$Effect);
+
+	    function _class() {
+	        _classCallCheck(this, _class);
+
+	        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	    }
+
+	    _createClass(_class, [{
+	        key: 'value',
+	        value: function value(val) {
+	            try {
+	                var _val = undefined === val ? null : val;
+	                if (null === _val) {
+	                    if (null === this.param) {
+	                        return 20;
+	                    }
+	                    return this.param;
+	                }
+	                if ('number' !== typeof _val) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.param = _val;
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }, {
+	        key: 'initEffect',
+	        value: function initEffect(flg, eff) {
+	            try {
+	                if (true === flg) {
+	                    eff.target.style('box-shadow', null);
+	                } else {
+	                    eff.target.style('box-shadow', '0px ' + this.value() / 2 + 'px ' + this.value() + 'px ' + '0px gray');
+	                }
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }, {
+	        key: 'effectConts',
+	        value: function effectConts(flg, eff) {
+	            try {
+	                if (true === flg) {
+	                    eff.target.style('box-shadow', '0px ' + this.value() / 2 + 'px ' + this.value() + 'px ' + '0px gray');
+	                } else {
+	                    eff.target.style('box-shadow', null);
+	                }
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.Effect);
+
+/***/ }
+/******/ ]);
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file hrzcenter.js
+	 */
+	mofron.layout.HrzCenter = function (_mofron$Layout) {
+	    _inherits(_class, _mofron$Layout);
+
+	    function _class(rt) {
+	        _classCallCheck(this, _class);
+
+	        try {
+	            var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
+
+	            _this.rate = rt === undefined ? 80 : rt;
+	        } catch (e) {
+	            console.error(e.stack);
+	            throw e;
+	        }
+	        return _this;
+	    }
+
+	    _createClass(_class, [{
+	        key: 'layoutConts',
+	        value: function layoutConts(idx, tgt) {
+	            try {
+	                tgt.style('width', '100%');
+	                if ('fixed' === tgt.style('position')) {
+	                    tgt.style('position');
+	                }
+	                tgt.style('width', this.rate + '%');
+	                tgt.style('position', 'relative');
+	                tgt.style('left', (100 - this.rate) / 2 + '%');
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.Layout);
+
+/***/ }
+/******/ ]);
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file Padding.js
+	 */
+
+	mofron.layout.Padding = function (_mofron$Layout) {
+	    _inherits(_class, _mofron$Layout);
+
+	    function _class(tp, val) {
+	        _classCallCheck(this, _class);
+
+	        try {
+	            var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
+
+	            var _tp = undefined === tp ? null : tp;
+	            var _val = undefined === val ? null : val;
+
+	            if (null === _tp) {
+	                throw new Error('invalid paramter');
+	            } else if ('number' === typeof _tp) {
+	                _val = _tp;
+	                _tp = '';
+	            }
+
+	            _this.m_type = null;
+	            _this.m_value = null;
+
+	            _this.type(_tp);
+	            _this.value(_val);
+	        } catch (e) {
+	            console.error(e.stack);
+	            throw e;
+	        }
+	        return _this;
+	    }
+
+	    _createClass(_class, [{
+	        key: 'layoutConts',
+	        value: function layoutConts(idx, tgt) {
+	            try {
+	                var pd = 'padding';
+	                if (null !== this.type()) {
+	                    pd += '-' + this.type();
+	                }
+	                tgt.vdom().style(pd, this.value() + 'px');
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }, {
+	        key: 'type',
+	        value: function type(tp) {
+	            try {
+	                if (undefined === tp) {
+	                    return this.m_type;
+	                }
+	                if ('string' != typeof tp || '' != tp && 'top' != tp && 'right' != tp && 'bottom' != tp && 'left' != tp) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.m_type = tp;
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }, {
+	        key: 'value',
+	        value: function value(val) {
+	            try {
+	                if (undefined === val) {
+	                    return this.m_value;
+	                }
+
+	                if (null === val || 'number' !== typeof val) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.m_value = val;
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.Layout);
+
+/***/ }
+/******/ ]);
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(9);
+__webpack_require__(12);
+__webpack_require__(13);
+__webpack_require__(11);
+__webpack_require__(10);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @file centerconts.js
+	 * @author simpart
+	 */
+
+	/**
+	 * @class CenterConts
+	 * @brief CenterContents Template Class
+	 */
+	mofron.tmpl.CenterConts = function (_mofron$Template) {
+	    _inherits(_class, _mofron$Template);
+
+	    /**
+	     * initialize member
+	     *
+	     * @param app_nm : (string) application name
+	     */
+	    function _class(app_nm) {
+	        _classCallCheck(this, _class);
+
+	        try {
+	            var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, app_nm));
+
+	            _this.name('CenterConts');
+	            _this.header = null;
+	            _this.conts_pnl = null;
+	            _this.conts = new Array();
+	        } catch (e) {
+	            console.error(e.stack);
+	            throw e;
+	        }
+	        return _this;
+	    }
+
+	    _createClass(_class, [{
+	        key: 'initTmplConts',
+	        value: function initTmplConts(prm) {
+	            try {
+	                if (null !== prm) {
+	                    if ('string' !== typeof prm) {
+	                        throw new Error('invalid parameter');
+	                    }
+	                    this.title(prm);
+	                }
+	                this.base.addChild(this.getHeader());
+	                var pnl = this.getContsPnl();
+	                for (var conts_elm in this.conts) {
+	                    pnl.addChild(this.conts[conts_elm]);
+	                }
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }, {
+	        key: 'addConts',
+	        value: function addConts(cont) {
+	            try {
+	                if ('object' !== (typeof cont === 'undefined' ? 'undefined' : _typeof(cont))) {
+	                    throw new Error('invalid parameter');
+	                }
+	                this.conts.push(cont);
+	                if (true === this.base.isRendered()) {
+	                    this.getContsPnl().addChild(cont);
+	                }
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+
+	        /**
+	         * get header component
+	         */
+
+	    }, {
+	        key: 'getHeader',
+	        value: function getHeader() {
+	            try {
+	                if (null !== this.header) {
+	                    return this.header;
+	                }
+	                var ttl = this.title();
+	                if (null === ttl) {
+	                    ttl = '';
+	                }
+
+	                var hdr = this.theme().getComp('Header');
+	                if (null === hdr) {
+	                    hdr = mofron.comp.PageHeader;
+	                }
+	                this.header = new hdr(ttl);
+	                return this.header;
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }, {
+	        key: 'getContsPnl',
+	        value: function getContsPnl() {
+	            try {
+	                if (null !== this.conts_pnl) {
+	                    return this.conts_pnl;
+	                }
+
+	                var cp_base1 = new mofron.Component();
+	                var cp_base2 = new mofron.Component();
+	                var cp_main = new mofron.Component();
+
+	                cp_base1.addLayout(new mofron.layout.Padding('top', 1));
+	                this.base.addChild(cp_base1);
+
+	                var bg_clr = this.theme().get('Color', 1);
+	                if (null === bg_clr) {
+	                    bg_clr = new mofron.util.Color(240, 240, 240);
+	                }
+	                cp_base2.style('background', bg_clr.getStyle());
+	                cp_base2.setEffect(new mofron.effect.Backgd());
+	                cp_base2.addLayout(new mofron.layout.HrzCenter());
+	                cp_base1.addChild(cp_base2);
+
+	                cp_main.setEffect(new mofron.effect.Backgd());
+	                cp_main.setEffect(new mofron.effect.Shadow(20));
+	                cp_main.style('background', new mofron.util.Color(255, 255, 255).getStyle());
+	                cp_base2.addChild(cp_main);
+
+	                this.conts_pnl = cp_main;
+	                return this.conts_pnl;
+	            } catch (e) {
+	                console.error(e.stack);
+	                throw e;
+	            }
+	        }
+	    }]);
+
+	    return _class;
+	}(mofron.Template);
+
+/***/ }
+/******/ ]);
+
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(1);
-__webpack_require__(2);
-__webpack_require__(0);
+__webpack_require__(5);
+__webpack_require__(6);
+__webpack_require__(3);
+__webpack_require__(4);
 
 /***/ })
 /******/ ]);
